@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "types": ["jest", "node", "@testing-library/jest-dom"],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "typeRoots": ["node_modules/@types", "src/@types", "src/setuTests.d.ts"],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/types/*": ["@types/*"],
+      "@components/*": ["components/*"],
+      "@hooks/*": ["lib/hooks/*"],
+      "@hocs/*": ["lib/hocs/*"],
+      "@utils/*": ["lib/utils/*"]
+    }
+  },
+  "includes": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.graphql",
+    "**/*.gql",
+    "**/*.json",
+    ".next/types/**/*.ts"
+  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "./jest.setup.ts"],
+  "exclude": ["node_modules"]
+}
