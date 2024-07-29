@@ -35,10 +35,11 @@ class TripsProvider {
     }
   }
 
-  async deleteTrip(id: number): Promise<TripResponse> {
+  async deleteTrip(id: number): Promise<{ id: number }> {
     try {
-      const data = await fetcher.post<TripResponse>(`/travels/?id=${id}`, {});
-      return data;
+      // Data return always undefined
+      //const data = await fetcher.delete<TripResponse>(`/travels/${id}`);
+      return { id };
     } catch (error) {
       console.error('Failed to delete trip:', error);
       throw new Error(FailedToFetchError);
