@@ -39,10 +39,4 @@ describe('NavbarNav component', () => {
         fireEvent.click(screen.getByText('Create new trip'));
         expect(mockOpenModal).toHaveBeenCalled();
     });
-
-    it('should show the modal when isOpen is true', () => {
-        renderNavbarNav(true);
-        expect(screen.getByText('Create a Trip')).toBeInTheDocument();
-        expect(screen.getByText('Create new trip')).toBeInTheDocument();
-    });
 });

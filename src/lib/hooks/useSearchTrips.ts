@@ -3,14 +3,14 @@ import { deleteTrip, filtersTrip, searchTrips } from '@/components/trips-grid/Tr
 import { Trip } from '../services/mappers/types';
 import { TripsFilters } from '@/components/trips-grid/Grid/GridContext';
 
-const useSearchTrips = (filters: TripsFilters, data: Trip[]): Trip[] => {
+const useSearchTrips = (filters: TripsFilters, data: Trip[]) => {
   const [trips, setTrips] = useState<Trip[]>(data);
   const { search, status, id } = filters;
 
   useEffect(() => {
     let filteredTrips = data;
 
-    if (id) {
+    /*     if (id) {
       filteredTrips = deleteTrip(id, trips);
     }
 
@@ -20,12 +20,12 @@ const useSearchTrips = (filters: TripsFilters, data: Trip[]): Trip[] => {
 
     if (status) {
       filteredTrips = filtersTrip(status, filteredTrips);
-    }
+    } */
 
     setTrips(filteredTrips);
   }, [search, status, id, data]);
 
-  return trips;
+  return { trips, setTrips };
 };
 
 export default useSearchTrips;

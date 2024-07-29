@@ -18,13 +18,16 @@ export const DefaultValues = {
 export type GridContextValue = {
     filters: TripsFilters,
     setFilters: Dispatch<SetStateAction<TripsFilters>>,
+    setTrips: Dispatch<SetStateAction<Trip[]>>,
     trips: Trip[]
 }
 
 export const GridContext = React.createContext<GridContextValue>({
     filters: DefaultValues,
     setFilters: () => { },
-    trips: []
+    setTrips: () => { },
+    trips: [],
+
 })
 
 type GridWrapperProps = PropsWithChildren & {
@@ -33,7 +36,7 @@ type GridWrapperProps = PropsWithChildren & {
 
 export const GridWrapper: FC<GridWrapperProps> = ({ data, children }) => {
     const [filters, setFilters] = useState<TripsFilters>(DefaultValues);
-    const trips = useSearchTrips(filters, data)
+    const { trips, setTrips } = useSearchTrips(filters, data)
 
     useEffect(() => {
         if (filters.id) {
@@ -45,6 +48,7 @@ export const GridWrapper: FC<GridWrapperProps> = ({ data, children }) => {
         return {
             filters,
             setFilters,
+            setTrips,
             trips,
         };
     }, [trips, filters]);

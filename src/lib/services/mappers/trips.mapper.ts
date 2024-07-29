@@ -1,4 +1,4 @@
-import { ItineraryResponse, TripResponse } from '../providers/types';
+import { ItineraryResponse, Status, TripResponse } from '../providers/types';
 import { Itinerary, Trip, TripInput } from './types';
 
 export const itinerayResponseToItinerary = (
@@ -24,8 +24,10 @@ export const tripResponseToTrip = (response: TripResponse): Trip => {
     id: response.id,
     title: response.title,
     desc: response.description,
-    image: response.photo_url,
-    status: response.status,
+    intro: response.description,
+    image:
+      'https://a.cdn-hotels.com/gdcs/production82/d1923/447a348f-f875-4885-b00a-e9a90603fef5.jpg',
+    status: Status.TODO,
     itinerary: itinerayResponseToItinerary(response.itinerary, response.id),
   };
 };
@@ -39,6 +41,7 @@ export const tripsResponseToTrips = (response: TripResponse[]): Trip[] => {
     id: trip.id,
     title: trip.title,
     desc: trip.description,
+    intro: trip.description,
     image: trip.photo_url,
     status: trip.status,
     itinerary: itinerayResponseToItinerary(trip.itinerary, trip.id),
@@ -86,7 +89,7 @@ export const tripToTripInput = (trip: Trip): TripInput => {
     introduction: trip.desc,
     description: trip.desc,
     photo_url: trip.image,
-    status: trip.status.toLowerCase() as TripInput['status'],
+    status: 'done',
     itinerary: itinerary_,
   };
 };

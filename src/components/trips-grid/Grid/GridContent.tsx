@@ -18,7 +18,7 @@ const GridContent: FC = () => {
         closeModal: state.closeModal,
     }));
 
-    if (trips.length === 0) {
+    if (!trips || trips.length === 0) {
         return (
             <GridNotFound />
         )
@@ -26,7 +26,7 @@ const GridContent: FC = () => {
 
     return (
         <>
-            {trips.map(trip => (
+            {trips?.map(trip => (
                 <GridRow key={`${trip.id}-{${trip.title}}`}>
                     <TripWrapper trip={trip}>
                         <Trip truncate />
