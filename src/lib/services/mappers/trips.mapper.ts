@@ -25,9 +25,8 @@ export const tripResponseToTrip = (response: TripResponse): Trip => {
     title: response.title,
     desc: response.description,
     intro: response.description,
-    image:
-      'https://a.cdn-hotels.com/gdcs/production82/d1923/447a348f-f875-4885-b00a-e9a90603fef5.jpg',
-    status: Status.TODO,
+    image: response.photo_url,
+    status: response.status,
     itinerary: itinerayResponseToItinerary(response.itinerary, response.id),
   };
 };
@@ -37,15 +36,27 @@ export const tripsResponseToTrips = (response: TripResponse[]): Trip[] => {
     return [];
   }
 
-  const trips: Trip[] = response.map((trip) => ({
-    id: trip.id,
-    title: trip.title,
-    desc: trip.description,
-    intro: trip.description,
-    image: trip.photo_url,
-    status: trip.status,
-    itinerary: itinerayResponseToItinerary(trip.itinerary, trip.id),
-  }));
+  const seenIds = new Set<number>();
+  let uniqueIdCounter = Math.max(...response.map((trip) => trip.id)) || 0;
+
+  const trips: Trip[] = response.map((trip) => {
+    // Ensure unique ID
+    let uniqueId = trip.id;
+    if (seenIds.has(uniqueId)) {
+      uniqueId = ++uniqueIdCounter;
+    }
+    seenIds.add(uniqueId);
+
+    return {
+      id: uniqueId,
+      title: trip.title,
+      desc: trip.description,
+      intro: trip.description,
+      image: trip.photo_url,
+      status: trip.status,
+      itinerary: itinerayResponseToItinerary(trip.itinerary, uniqueId),
+    };
+  });
 
   return trips;
 };
@@ -82,6 +93,11 @@ export const tripToTripInput = (trip: Trip): TripInput => {
       description: item.desc,
     }));
   }
+  let status_ = Status.TODO;
+
+  if (trip.status) {
+    status_ = trip.status;
+  }
 
   return {
     id: `${trip.id}`,
@@ -89,7 +105,7 @@ export const tripToTripInput = (trip: Trip): TripInput => {
     introduction: trip.desc,
     description: trip.desc,
     photo_url: trip.image,
-    status: 'done',
+    status: status_,
     itinerary: itinerary_,
   };
 };

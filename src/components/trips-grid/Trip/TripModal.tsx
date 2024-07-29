@@ -2,7 +2,7 @@
 
 import { Modal } from "@/components/ui/Modal";
 import { tripToTripInput } from "@/lib/services/mappers/trips.mapper";
-import { FC, useContext } from "react";
+import { FC, useContext, useEffect } from "react";
 import { TripDetails } from "../TripDetails";
 import { TripForm } from "../TripForm";
 import TripFormHeader from "../TripForm/TripFormHeader";

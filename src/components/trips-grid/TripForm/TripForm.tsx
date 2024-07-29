@@ -14,9 +14,11 @@ import { FormRow, FormSection } from "./TripForm.styles";
 import TripFormError from './TripFormError';
 import TripFormItinerary from "./TripFormItinerary";
 import TripFormSubmit from "./TripFormSubmit";
+import { Status } from "@/lib/services/providers/types";
 
 const DefaultValues = {
-    itinerary: []
+    itinerary: [],
+    status: Status.TODO
 }
 
 type TripFormProps = {

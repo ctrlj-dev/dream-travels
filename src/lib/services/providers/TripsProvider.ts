@@ -1,8 +1,7 @@
 import { FailedToFetchError } from '@/lib/constants';
-import { TripResponse } from './types';
-import fetcher from '../utils/fetcher';
 import { TripInput } from '../mappers/types';
-import { tripToTripInput } from '../mappers/trips.mapper';
+import fetcher from '../utils/fetcher';
+import { TripResponse } from './types';
 
 class TripsProvider {
   async getTrips(): Promise<TripResponse[]> {
@@ -27,7 +26,7 @@ class TripsProvider {
 
   async editTrip(trip: TripInput): Promise<TripResponse> {
     try {
-      const data = await fetcher.put<TripResponse>(`/travels/${trip.id}`, { ...trip });
+      const data = await fetcher.patch<TripResponse>(`/travels/${trip.id}`, { ...trip });
       return data;
     } catch (error) {
       console.error('Failed to edit trip:', error);

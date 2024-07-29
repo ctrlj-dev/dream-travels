@@ -1,57 +1,71 @@
 'use client'
 
-import { Check, CheckSuccess } from "@/components/ui/Icons"
-import { Typography } from "@/components/ui/Typography"
-import theme from "@/lib/theme/theme"
-import { FC, useCallback, useContext, useEffect, useState } from "react"
-import TripContext from "../Trip/TripContext"
-import { DetailsStatusRoot } from "./TripDetailsStyles"
-import { Status } from "@/lib/services/providers/types"
-import { mapStatusToAction } from "./trip-details.utils"
-import { editTrip } from "@/lib/services/api/trips"
+import { Check, CheckSuccess } from "@/components/ui/Icons";
+import { Typography } from "@/components/ui/Typography";
+import { editTrip } from "@/lib/services/api/trips";
+import { tripToTripInput } from "@/lib/services/mappers/trips.mapper";
+import { TripInput } from "@/lib/services/mappers/types";
+import { Status } from "@/lib/services/providers/types";
+import theme from "@/lib/theme/theme";
+import { FC, useContext } from "react";
+import { GridContext } from "../Grid";
+import TripContext from "../Trip/TripContext";
+import { mapStatusToAction } from "./trip-details.utils";
+import { DetailsStatusRoot } from "./TripDetailsStyles";
+
+const getOppositeStatus = (currentStatus: Status): Status => {
+    switch (currentStatus) {
+        case Status.TODO:
+            return Status.DONE;
+        case Status.DONE:
+            return Status.TODO;
+        default:
+            return currentStatus;
+    }
+};
 
 const TripDetailsStatus: FC = () => {
-    const { trip } = useContext(TripContext)
-    const { status } = trip
-    const [status_, setStatus] = useState(status);
-    const complete = status_.toUpperCase() === Status.DONE;
+    const { trip } = useContext(TripContext);
+    const { setTrips } = useContext(GridContext);
+    const { status } = trip;
 
-    const handleComplete = useCallback(async () => {
-        if (complete) {
-            const response = await editTrip({ status: 'todo' });
-            if (response) {
-                setStatus(response.status);
-            }
-        } else {
-            const response = await editTrip({ status: 'done' });
-            if (response) {
-                setStatus(response.status);
-            }
+    const handleComplete = async () => {
+        const newStatus = getOppositeStatus(status);
+
+        const input: TripInput = {
+            ...tripToTripInput(trip),
+            status: newStatus,
+        };
+
+        const response = await editTrip(input);
+
+        if (response) {
+            setTrips((prevTrips) => {
+                return prevTrips.map((trips) =>
+                    trips.id === response.id ? { ...trips, ...response } : trips
+                );
+            });
         }
-    }, [complete]);
-
-
-
+    };
 
 
     return (
         <DetailsStatusRoot
-            className={complete ? 'complete' : 'uncomplete'}
-            onClick={() => handleComplete()}
+            className={status === Status.DONE ? 'complete' : 'uncomplete'}
+            onClick={handleComplete}
         >
             <Check />
             <CheckSuccess />
             <Typography
                 variant="body"
                 sx={{
-                    color: theme.colors.primary.light
-                }}>
-                {mapStatusToAction(status_)}
-            </Typography >
-        </DetailsStatusRoot >
-
-    )
-
+                    color: theme.colors.primary.light,
+                }}
+            >
+                {mapStatusToAction(status)}
+            </Typography>
+        </DetailsStatusRoot>
+    );
 }
 
-export default TripDetailsStatus
+export default TripDetailsStatus;

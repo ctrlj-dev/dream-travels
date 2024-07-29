@@ -5,12 +5,14 @@ const sampleTrips: Trip[] = [
   {
     id: 1,
     title: 'Trip to Paris',
+    intro: '',
     desc: 'Enjoy the Eiffel Tower and more',
     image: '/images/paris.jpg',
     status: Status.TODO,
   },
   {
     id: 2,
+    intro: '',
     title: 'Trip to New York',
     desc: 'Explore the Big Apple',
     image: '/images/newyork.jpg',
@@ -18,6 +20,7 @@ const sampleTrips: Trip[] = [
   },
   {
     id: 3,
+    intro: '',
     title: 'Trip to Tokyo',
     desc: 'Experience the culture and technology',
     image: '/images/tokyo.jpg',
@@ -27,6 +30,7 @@ const sampleTrips: Trip[] = [
 
 const sampleTripWithoutItinerary: Trip = {
   id: 1,
+  intro: '',
   title: 'Trip to Paris',
   desc: 'Enjoy the Eiffel Tower and more',
   image: '/images/paris.jpg',
@@ -36,6 +40,7 @@ const sampleTripWithoutItinerary: Trip = {
 
 const sampleTripWithItinerary: Trip = {
   id: 1,
+  intro: '',
   title: 'Trip to Paris',
   desc: 'Enjoy the Eiffel Tower and more',
   image: '/images/paris.jpg',

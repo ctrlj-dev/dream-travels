@@ -11,6 +11,7 @@ const mockSetFilters = jest.fn();
 
 const mockContextValue = {
     trips: sampleTrips,
+    setTrips: () => { },
     filters: { search: '', status: undefined },
     setFilters: mockSetFilters,
 };

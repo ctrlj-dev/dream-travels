@@ -1,6 +1,6 @@
 export enum Status {
-  TODO = 'TODO',
-  DONE = 'DONE',
+  TODO = 'todo',
+  DONE = 'done',
 }
 
 export interface ItineraryResponse {
