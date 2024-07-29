@@ -12,7 +12,7 @@ const useSearchTrips = (filters: TripsFilters, data: Trip[]) => {
 
     /*     if (id) {
       filteredTrips = deleteTrip(id, trips);
-    }
+    } */
 
     if (search) {
       filteredTrips = searchTrips(search, filteredTrips);
@@ -20,10 +20,10 @@ const useSearchTrips = (filters: TripsFilters, data: Trip[]) => {
 
     if (status) {
       filteredTrips = filtersTrip(status, filteredTrips);
-    } */
+    }
 
     setTrips(filteredTrips);
-  }, [search, status, id, data]);
+  }, [search, status, data, trips]);
 
   return { trips, setTrips };
 };
