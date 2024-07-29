@@ -26,6 +26,8 @@ type TripFormProps = {
     mode?: 'create' | 'edit';
 }
 
+const urlRegex = /^(https?:\/\/[^\s$.?#].[^\s]*)$/i;
+
 const TripForm: FC<TripFormProps> = ({ defaultValues = DefaultValues, mode = 'create' }) => {
     const { setTrips } = useContext(GridContext)
     const [success, setSuccess] = useState(false);
@@ -110,12 +112,19 @@ const TripForm: FC<TripFormProps> = ({ defaultValues = DefaultValues, mode = 'cr
                         </FormSection>
                         <FormSection>
                             <Label title='Description'>Description</Label>
-                            <Textarea id="description" {...register("description", { required: "Description is required" })} placeholder="Discover the wonders of the Roman empire..." height='144px' />
+                            <Textarea id="description" {...register("description", {
+                                required: "Description is required"
+                            })} placeholder="Discover the wonders of the Roman empire..." height='144px' />
                             <TripFormError message={errors.description?.message} />
                         </FormSection>
                         <FormSection>
                             <Label title='Image'>Image</Label>
-                            <Input id="photo_url" {...register("photo_url", { required: "Image is required" })} placeholder="Image URL" />
+                            <Input id="photo_url" {...register("photo_url", {
+                                required: "Image is required", pattern: {
+                                    value: urlRegex,
+                                    message: "Invalid URL format"
+                                }
+                            })} placeholder="Image URL" />
                             <TripFormError message={errors.photo_url?.message} />
                         </FormSection>
                         <FormSection>
