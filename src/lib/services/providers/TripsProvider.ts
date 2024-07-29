@@ -26,6 +26,7 @@ class TripsProvider {
 
   async editTrip(trip: TripInput): Promise<TripResponse> {
     try {
+      // Doesn't work for new entries...
       const data = await fetcher.patch<TripResponse>(`/travels/${trip.id}`, { ...trip });
       return data;
     } catch (error) {

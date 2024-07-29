@@ -46,7 +46,6 @@ export const tripsResponseToTrips = (response: TripResponse[]): Trip[] => {
       uniqueId = ++uniqueIdCounter;
     }
     seenIds.add(uniqueId);
-
     return {
       id: uniqueId,
       title: trip.title,
