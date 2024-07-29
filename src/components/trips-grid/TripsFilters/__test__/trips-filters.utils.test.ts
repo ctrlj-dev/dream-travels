@@ -1,7 +1,6 @@
-import { searchTrips, filtersTrip, deleteTrip } from '../trips-filters.utils';
 import { Trip } from '@/lib/services/mappers/types';
 import { Status } from '@/lib/services/providers/types';
-import { sampleTrips } from '../../Grid/__test__/__mocks__/Trips';
+import { filtersTrip, searchTrips } from '../trips-filters.utils';
 
 describe('Trip utility functions', () => {
   describe('searchTrips', () => {
@@ -10,7 +9,7 @@ describe('Trip utility functions', () => {
       title: 'Adventure in the Alps',
       desc: 'A thrilling experience in the beautiful Alps mountains.',
       status: Status.DONE,
-    };
+    } as Trip;
 
     it('should return true if search value is in title', () => {
       expect(searchTrips(trip, 'adventure')).toBe(true);
