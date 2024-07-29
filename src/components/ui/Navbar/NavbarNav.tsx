@@ -9,9 +9,7 @@ import { TripForm } from '@/components/trips-grid/TripForm';
 import TripFormHeader from '@/components/trips-grid/TripForm/TripFormHeader';
 
 const NavbarNav: FC = () => {
-    const { isOpen, closeModal, openModal } = useGlobalModalStore((state) => ({
-        isOpen: state.isOpen,
-        closeModal: state.closeModal,
+    const { openModal } = useGlobalModalStore((state) => ({
         openModal: state.openModal,
     }));
 
@@ -20,9 +18,6 @@ const NavbarNav: FC = () => {
             <Button onClick={() => openModal()} variant="secondary" size="medium">
                 Create new trip
             </Button >
-            <Modal isOpen={isOpen} header={<TripFormHeader title='Create a Trip' />} onClose={closeModal} >
-                <TripForm />
-            </Modal >
         </>
     );
 };
