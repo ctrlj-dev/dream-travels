@@ -12,34 +12,30 @@ import { useGlobalModalStore } from "@/lib/store";
 import TripFormHeader from "../TripForm/TripFormHeader";
 
 const GridContent: FC = () => {
-    const { trips } = useContext(GridContext)
-    const { isOpen, closeModal } = useGlobalModalStore((state) => ({
+    const { trips } = useContext(GridContext);
+    const { isOpen, closeModal } = useGlobalModalStore(state => ({
         isOpen: state.isOpen,
         closeModal: state.closeModal,
     }));
 
-    if (!trips || trips.length === 0) {
-        return (
-            <GridNotFound />
-        )
-    }
-
     return (
         <>
-            {trips?.map(trip => (
-                <GridRow key={`${trip.id}-{${trip.title}}`}>
-                    <TripWrapper trip={trip}>
-                        <Trip truncate />
-                    </TripWrapper>
-                </GridRow>
-            ))
-            }
-            <Modal isOpen={isOpen} header={<TripFormHeader title='Create a Trip' />} onClose={closeModal} >
+            {(!trips || trips.length === 0) ? (
+                <GridNotFound />
+            ) : (
+                trips.map(trip => (
+                    <GridRow key={`${trip.id}-${trip.title}`}>
+                        <TripWrapper trip={trip}>
+                            <Trip truncate />
+                        </TripWrapper>
+                    </GridRow>
+                ))
+            )}
+            <Modal isOpen={isOpen} header={<TripFormHeader title='Create a Trip' />} onClose={closeModal}>
                 <TripForm />
-            </Modal >
-        </ >
-
-    )
+            </Modal>
+        </>
+    );
 }
 
-export default GridContent
+export default GridContent;

@@ -34,9 +34,6 @@ export const TripWrapper: FC<TripWrapperProps> = ({ trip, children }) => {
             handleEdit() {
                 dispatch({ type: TripActionType.EDIT })
             },
-            handleCreate() {
-                dispatch({ type: TripActionType.CREATE })
-            },
             handleDelete() {
                 dispatch({ type: TripActionType.DELETE })
             },

@@ -7,6 +7,7 @@ import { GridWrapper } from "./GridContext"
 
 const Grid: FC = async () => {
     const data = await getTrips();
+
     return (
         <GridWrapper data={data}>
             <Hero title={"The places you dream of"} desc={"Let’s live new adventures"} />

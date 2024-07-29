@@ -6,7 +6,7 @@ import Input from "@/components/ui/Inputs/Input/Input";
 import { Label } from "@/components/ui/Inputs/Label";
 import { Textarea } from "@/components/ui/Inputs/Textarea";
 import { createTrip, editTrip } from "@/lib/services/api/trips";
-import { Trip, TripInput } from "@/lib/services/mappers/types";
+import { TripInput } from "@/lib/services/mappers/types";
 import { FC, useContext, useState } from 'react';
 import { FormProvider, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { GridContext } from "../Grid";
@@ -14,7 +14,6 @@ import { FormRow, FormSection } from "./TripForm.styles";
 import TripFormError from './TripFormError';
 import TripFormItinerary from "./TripFormItinerary";
 import TripFormSubmit from "./TripFormSubmit";
-import { findTripById } from "../TripsFilters";
 
 const DefaultValues = {
     itinerary: []
