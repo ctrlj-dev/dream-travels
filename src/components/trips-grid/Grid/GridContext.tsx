@@ -9,7 +9,6 @@ import { filtersTrip } from '../TripsFilters/trips-filters.utils';
 export type TripsFilters = {
     search: string;
     status?: Status;
-    id?: number;
 };
 
 export const DefaultValues = {
