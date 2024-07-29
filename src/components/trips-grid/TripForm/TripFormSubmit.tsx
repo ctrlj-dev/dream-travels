@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/Buttons/Button";
 import { LinkButton } from "@/components/ui/Buttons/LinkButton";
 import { Typography } from "@/components/ui/Typography";
 import { FC, useEffect } from "react";
-import { useFormContext } from "react-hook-form";
-import { FormSection } from "./TripForm.styles";
+import { Form, useFormContext } from "react-hook-form";
+import { FormSection, SubmitSection } from "./TripForm.styles";
 
 type TripFormSubmitProps = {
     success: boolean,
@@ -21,22 +21,25 @@ const TripFormSubmit: FC<TripFormSubmitProps> = ({ success, handleSuccess, mode 
         if (success && mode === 'create') {
             reset();
         }
-    }, [success, reset, handleSuccess]);
+    }, [success, reset]);
 
     if (success && mode === 'edit') {
         return (
             <>
-                <Button type="submit" variant={"primary"} size={"large"}>Save</Button>
-                <Typography className='success' componentVariant='p' variant="body" sx={{ marginLeft: '16px', display: 'inline-block' }}>¡Edited with success!</Typography>
+                <Typography className='success' componentVariant='p' variant="h2" sx={{
+                    textAlign: 'center', marginBottom: '8px'
+                }}>¡Edited with success!</Typography>
             </>
         )
     }
     if (success) {
         return (
             <FormSection>
-                <Typography className='success' componentVariant='p' variant="body" sx={{ textAlign: 'center', marginBottom: '8px' }}>¡New trip create with success!</Typography>
+                <Typography className='success' componentVariant='p' variant="h2" sx={{
+                    textAlign: 'center', marginTop: '34px', marginBottom: '8px'
+                }}>¡New trip create with success!</Typography>
                 <LinkButton variant="outlined" onClick={handleSuccess} sx={{ width: '100%', margin: '0 auto', textAlign: 'center', marginBottom: '8px' }}>Create another trip</LinkButton>
-            </FormSection>
+            </FormSection >
         )
     }
 

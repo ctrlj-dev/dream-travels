@@ -18,6 +18,7 @@ export const createTrip = async (trip: TripInput): Promise<Trip> => {
 
 export const editTrip = async (trip: TripInput): Promise<Trip> => {
   const response = await TripsProvider.editTrip(trip);
+  console.log(tripResponseToTrip(response));
   return tripResponseToTrip(response);
 };
 

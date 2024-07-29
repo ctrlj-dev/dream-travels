@@ -11,17 +11,18 @@ export type Trip = {
   id: number;
   title: string;
   desc: string;
+  intro: string;
   image: string;
   status: Status;
   itinerary?: Itinerary[];
 };
 
 export type TripInput = {
-  id?: string;
-  title?: string;
+  id: string;
+  title: string;
   introduction?: string;
   description?: string;
-  photo_url?: string;
+  photo_url: string;
   status?: 'done' | 'todo';
   itinerary?: {
     day: number;
