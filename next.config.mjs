@@ -8,36 +8,7 @@ const nextConfig = {
     esmExternals: true,
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'a.cdn-hotels.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.aarp.net',
-      },
-      {
-        protocol: 'https',
-        hostname: 'content.skyscnr.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'humanidades.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.britannica.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'lp-cms-production.imgix.net',
-      },
-      {
-        protocol: 'https',
-        hostname: 'miro.medium.com',
-      },
-    ],
+    remotePatterns: [{ protocol: 'https', hostname: '**' }],
   },
 };
 

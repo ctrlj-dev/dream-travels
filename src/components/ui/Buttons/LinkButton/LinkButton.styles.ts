@@ -13,6 +13,9 @@ const LinkButtonRoot = styled.button<LinkButtonRootProps>`
   font-weight: 400;
   text-decoration: underline;
   cursor: pointer;
+  &:disabled {
+    opacity: 0.2;
+  }
   ${({ $sx }) => $sx && { ...$sx }};
   ${({ $variant, theme }) => {
     let color = theme.colors.primary.main;

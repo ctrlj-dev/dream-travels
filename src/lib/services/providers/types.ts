@@ -1,6 +1,6 @@
 export enum Status {
-  TODO = 'TODO',
-  DONE = 'DONE',
+  TODO = 'todo',
+  DONE = 'done',
 }
 
 export interface ItineraryResponse {
@@ -13,6 +13,7 @@ export interface TripResponse {
   id: number;
   title: string;
   description: string;
+  introduction?: string;
   photo_url: string;
   status: Status;
   itinerary?: ItineraryResponse[];

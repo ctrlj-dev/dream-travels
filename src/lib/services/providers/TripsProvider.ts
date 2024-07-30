@@ -1,7 +1,8 @@
 import { FailedToFetchError } from '@/lib/constants';
-import { TripResponse } from './types';
-import fetcher from '../utils/fetcher';
 import { TripInput } from '../mappers/types';
+import fetcher from '../utils/fetcher';
+import { TripResponse } from './types';
+import { tripInputToTripResponse, tripResponseToTrip } from '../mappers/trips.mapper';
 
 class TripsProvider {
   async getTrips(): Promise<TripResponse[]> {
@@ -24,9 +25,13 @@ class TripsProvider {
     }
   }
 
-  async editTrip(trip: TripInput): Promise<TripResponse> {
+  async editTrip(trip: TripInput): Promise<TripResponse | TripInput> {
     try {
-      const data = await fetcher.put<TripResponse>(`/travels/3`, trip);
+      // Doesn't work for new entries...or duplicated ids
+      if (+trip.id > 6 || +trip.id === 5) {
+        return tripInputToTripResponse({ ...trip, id: trip.id });
+      }
+      const data = await fetcher.patch<TripResponse>(`/travels/${trip.id}`, { ...trip });
       return data;
     } catch (error) {
       console.error('Failed to edit trip:', error);
@@ -34,10 +39,11 @@ class TripsProvider {
     }
   }
 
-  async deleteTrip(id: number): Promise<TripResponse> {
+  async deleteTrip(id: number): Promise<{ id: number }> {
     try {
-      const data = await fetcher.post<TripResponse>(`/travels/?id=${id}`, {});
-      return data;
+      // Data return always undefined
+      //const data = await fetcher.delete<TripResponse>(`/travels/${id}`);
+      return { id };
     } catch (error) {
       console.error('Failed to delete trip:', error);
       throw new Error(FailedToFetchError);

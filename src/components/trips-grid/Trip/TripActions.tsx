@@ -7,10 +7,6 @@ import { styled } from "styled-components";
 import { GridContext } from "../Grid";
 import TripContext from "./TripContext";
 
-type TripActionsProps = {
-    link: string;
-}
-
 const ActionsRoot = styled.div`
     display: flex;
     justify-content: space-between;
@@ -28,11 +24,11 @@ const ActionsContainer = styled.div`
     }
 `
 
-const TripActions: FC<TripActionsProps> = ({ link }) => {
-    const { api } = useContext(TripContext)
+const TripActions: FC = () => {
+    const { api, trip } = useContext(TripContext)
     const { handleDetails, handleEdit } = api
-    const { trip } = useContext(TripContext)
-    const { setFilters } = useContext(GridContext)
+    const { } = useContext(TripContext)
+    const { setTrips } = useContext(GridContext)
 
     const handleOpenDetails = () => {
         handleDetails()
@@ -46,7 +42,7 @@ const TripActions: FC<TripActionsProps> = ({ link }) => {
         if (id) {
             const response = await deleteTrip(id)
             if (response) {
-                setFilters(prevFilters => ({ ...prevFilters, id: id }));
+                setTrips(prevTrips => prevTrips.filter(trip => trip.id !== id));
             }
         }
     }

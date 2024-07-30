@@ -12,7 +12,7 @@ enum StatusAction {
  * Map status in it action
  */
 const mapStatusToAction = (status: Status): string => {
-  const status_ = status.toUpperCase();
+  const status_ = status;
   let action = 'Unknow status';
   if (status_ === Status.DONE) {
     action = StatusAction.COMPLETE;

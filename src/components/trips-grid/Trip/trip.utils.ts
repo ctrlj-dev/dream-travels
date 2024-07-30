@@ -26,7 +26,6 @@ export const TripInitialState = {
 export enum TripActionType {
   OPEN_DETAILS = 'OPEN_DETAILS',
   EDIT = 'EDIT',
-  CREATE = 'CREATE',
   DELETE = 'DELETE',
   RESET_STATE = 'RESET_STATE',
 }
@@ -37,14 +36,12 @@ export enum TripActionType {
 export type TripAction =
   | { type: TripActionType.OPEN_DETAILS }
   | { type: TripActionType.EDIT }
-  | { type: TripActionType.CREATE }
   | { type: TripActionType.DELETE }
   | { type: TripActionType.RESET_STATE };
 
 export type TripApi = {
   handleDetails: () => void;
   handleEdit: () => void;
-  handleCreate: () => void;
   handleDelete: () => void;
   handleReset: () => void;
 };
@@ -58,8 +55,6 @@ export const tripReducer = (state: TripActionState, action: TripAction) => {
       return { ...state, isDetails: true, isOpen: true };
     case 'EDIT':
       return { ...state, isEdit: true, isOpen: true };
-    case 'CREATE':
-      return { ...state, isCreate: true, isOpen: true };
     case 'DELETE':
       return { ...state, isDelete: true, isOpen: true };
     case 'RESET_STATE': {
